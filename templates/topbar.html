@@ -10,7 +10,7 @@
         <i class="fa fa-bars fa-lg fa-inverse"></i>
       </span>
     {% endif %}
-    <h1 class="header-bar__title"><a href="/"><span class="header-bar__title-text">{% trans "Projects" %}</span></a></h1>
+    <h1 class="header-bar__title"><a href="{% url "onadata.apps.main.views.home" %}"><span class="header-bar__title-text">{% trans "Projects" %}</span></a></h1>
   </div>
 </header>
 
@@ -32,14 +32,14 @@
 
     {% url "user_profile" user.username as is_username %}
     <li class="top-level-menu__item {% if request.path == is_username %} is-active {% endif %}">
-      <a href="/">
+      <a href="{% url "onadata.apps.main.views.home" %}">
         <i class="header-bar__page-icon fa fa-fw fa-globe"></i>
         {% trans "Projects" %}
       </a>
     </li>
-    
+
     <li class="top-level-menu__item {% if 'settings' in request.path %} is-active {% endif %}">
-      <a href="/{{ user.username }}/settings">
+      <a href="{% url "onadata.apps.main.views.profile_settings" user.username %}">
         <i class="header-bar__page-icon fa fa-fw fa-cog"></i>
         {% trans "Settings" %}
       </a>
@@ -64,7 +64,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="/" title="KoBoCAT"><img alt="KoBoCAT"
+      <a class="brand" href="{% url "onadata.apps.main.views.home" %}" title="KoBoCAT"><img alt="KoBoCAT"
           src="{% static "images/kobocat_logo.png" %}" style="height: 34px" /></a>
       <div class="nav-collapse collapse">
           {% if form_view %}
@@ -100,7 +100,7 @@
           <ul class="nav pull-right">
             {% if user.is_authenticated %}
             <!-- <li><a id="new-form" href="#" rel="tooltip" title="{% trans "New Form" %}"><img src="{{ STATIC_URL }}images/upload-icon.png"></a></li> -->
-            <li><a href="/{{user.username}}">{{user.username}}</a></li>
+            <li><a href="{% url "user_profile" user.username %}">{{user.username}}</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <b class="caret"></b>
